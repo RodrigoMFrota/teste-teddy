@@ -9,5 +9,16 @@ export default {
   theme: {
     extend: {},
   },
-  plugins: [],
+  daisyui: {
+    themes: [
+      {
+        light: {
+          ...require('daisyui/src/theming/themes').light,
+          primary: '#ff0000',
+          secondary: '#eb6625',
+        },
+      },
+    ],
+  },
+  plugins: [require('daisyui')],
 };
