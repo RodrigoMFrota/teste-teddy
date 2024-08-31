@@ -46,21 +46,21 @@ export const SignIn = () => {
             <input
               type='text'
               placeholder='Usuário:'
-              className='input input-bordered input-secondary w-full'
+              className='input input-bordered input-primary w-full'
               {...register('username')}
             />
 
             <input
               type='password'
               placeholder='Senha:'
-              className='input input-bordered input-secondary w-full'
+              className='input input-bordered input-primary w-full'
               {...register('password')}
             />
 
             <div className='flex items-center gap-2'>
               <input
                 type='checkbox'
-                className='checkbox checkbox-secondary'
+                className='checkbox checkbox-primary'
                 {...register('rememberMe')}
               />
 
@@ -69,7 +69,7 @@ export const SignIn = () => {
               </label>
             </div>
 
-            <button type='submit' className='btn btn-secondary w-full'>
+            <button type='submit' className='btn btn-primary w-full text-white'>
               Entrar
             </button>
           </form>

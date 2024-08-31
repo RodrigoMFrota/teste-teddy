@@ -1,3 +1,4 @@
+import { Header } from '@/components';
 import { useEffect } from 'react';
 import { Outlet, useNavigate } from 'react-router-dom';
 
@@ -10,5 +11,10 @@ export const PrivateRoute = () => {
     if (!localUser && !sessionUser) navigate('auth/sign-in');
   }, []);
 
-  return <Outlet />;
+  return (
+    <>
+      <Header />
+      <Outlet />
+    </>
+  );
 };

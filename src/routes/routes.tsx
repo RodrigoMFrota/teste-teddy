@@ -1,5 +1,5 @@
 import { PrivateRoute } from '@/middleware';
-import { Dashboard, SignIn } from '@/pages';
+import { About, Dashboard, ExternalCompanies, Partners, SignIn } from '@/pages';
 import { Navigate, createBrowserRouter } from 'react-router-dom';
 
 export const router = createBrowserRouter([
@@ -14,6 +14,18 @@ export const router = createBrowserRouter([
       {
         path: '/user/dashboard',
         element: <Dashboard />,
+      },
+      {
+        path: '/user/partners',
+        element: <Partners />,
+      },
+      {
+        path: '/user/external-companies',
+        element: <ExternalCompanies />,
+      },
+      {
+        path: '/user/about',
+        element: <About />,
       },
     ],
   },
