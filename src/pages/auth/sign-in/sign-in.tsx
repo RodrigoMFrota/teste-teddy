@@ -25,7 +25,7 @@ export const SignIn = () => {
       sessionStorage.setItem('username', data.username);
     }
 
-    navigate('/dashboard');
+    navigate('/user/dashboard');
   };
 
   return (

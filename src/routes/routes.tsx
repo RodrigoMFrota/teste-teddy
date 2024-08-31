@@ -1,3 +1,4 @@
+import { PrivateRoute } from '@/middleware';
 import { Dashboard, SignIn } from '@/pages';
 import { Navigate, createBrowserRouter } from 'react-router-dom';
 
@@ -7,8 +8,14 @@ export const router = createBrowserRouter([
     element: <SignIn />,
   },
   {
-    path: '/dashboard',
-    element: <Dashboard />,
+    path: '/user',
+    element: <PrivateRoute />,
+    children: [
+      {
+        path: '/user/dashboard',
+        element: <Dashboard />,
+      },
+    ],
   },
   {
     path: '*',
