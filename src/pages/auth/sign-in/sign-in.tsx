@@ -25,6 +25,12 @@ export const SignIn = () => {
                 placeholder='Senha:'
                 className='input input-bordered input-secondary w-full max-w-xs'
               />
+              <div className='flex items-center gap-2'>
+                <input type='checkbox' defaultChecked className='checkbox checkbox-secondary' />
+                <label className='cursor-pointer label'>
+                  <span className='label-text'>Manter-me conectado</span>
+                </label>
+              </div>
             </div>
           </form>
 
