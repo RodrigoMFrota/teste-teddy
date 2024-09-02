@@ -2,6 +2,7 @@ import { useForm } from 'react-hook-form';
 import { Header } from '@/components';
 import { useNavigate } from 'react-router-dom';
 import type * as T from './types';
+import { useEffect } from 'react';
 
 export const SignIn = () => {
   const navigate = useNavigate();
@@ -28,6 +29,12 @@ export const SignIn = () => {
 
     navigate('/user/dashboard');
   };
+
+  useEffect(() => {
+    const localUser = localStorage.getItem('username');
+    const sessionUser = sessionStorage.getItem('username');
+    if (localUser || sessionUser) navigate('/user/dashboard');
+  }, []);
 
   return (
     <>

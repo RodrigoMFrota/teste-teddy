@@ -29,6 +29,11 @@ export const ExternalCompanies = () => {
     navigate(`?page=${newPage}`);
   };
 
+  const shareCurrentPage = () => {
+    navigator.clipboard.writeText(window.location.href);
+    alert('Link copiado com sucesso.');
+  };
+
   const paginatedData = data
     ? data.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)
     : [];
@@ -41,7 +46,7 @@ export const ExternalCompanies = () => {
 
   return (
     <main className='min-h-[calc(100vh-5rem)] bg-zinc-900'>
-      <div className='container mx-auto py-6'>
+      <div className='container mx-auto'>
         <div className='container mx-auto py-6 flex flex-col gap-6'>
           <div className='flex justify-between gap-6 items-center'>
             <div className='w-1/3'>
@@ -133,28 +138,38 @@ export const ExternalCompanies = () => {
               ))}
           </div>
 
-          <div className='flex justify-center items-center gap-4 py-6'>
+          <div className='flex justify-between items-center gap-4 py-6'>
             <button
               type='button'
               className='btn btn-primary text-white'
-              onClick={() => handlePageChange(currentPage - 1)}
-              disabled={currentPage === 1}
+              onClick={() => shareCurrentPage()}
             >
-              Anterior
+              Compartilhar
             </button>
 
-            <span className='text-white'>
-              Página {currentPage} de {totalPages}
-            </span>
+            <div className='flex justify-center items-center gap-4'>
+              <button
+                type='button'
+                className='btn btn-primary text-white'
+                onClick={() => handlePageChange(currentPage - 1)}
+                disabled={currentPage === 1}
+              >
+                Anterior
+              </button>
 
-            <button
-              type='button'
-              className='btn btn-primary text-white'
-              onClick={() => handlePageChange(currentPage + 1)}
-              disabled={currentPage === totalPages}
-            >
-              Próxima
-            </button>
+              <span className='text-white'>
+                Página {currentPage} de {totalPages}
+              </span>
+
+              <button
+                type='button'
+                className='btn btn-primary text-white'
+                onClick={() => handlePageChange(currentPage + 1)}
+                disabled={currentPage === totalPages}
+              >
+                Próxima
+              </button>
+            </div>
           </div>
         </div>
       </div>
