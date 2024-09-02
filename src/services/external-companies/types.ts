@@ -1,3 +1,9 @@
+export type PostExternalCompanies = {
+  companyName: string;
+  isActive: boolean;
+  collaboratorsCount: number;
+};
+
 export type GetExternalCompaniesResponse = {
   id: string;
   name: string;
@@ -6,4 +12,11 @@ export type GetExternalCompaniesResponse = {
   lastSubmit: string;
   collaboratorsCount: number;
   isActive: boolean;
+};
+
+export type PutExternalCompanies = {
+  companyName: string;
+  isActive: boolean;
+  collaboratorsCount: number;
+  id: string;
 };

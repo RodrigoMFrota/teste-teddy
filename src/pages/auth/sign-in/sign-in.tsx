@@ -5,6 +5,7 @@ import type * as T from './types';
 
 export const SignIn = () => {
   const navigate = useNavigate();
+
   const { register, handleSubmit } = useForm<T.FormValues>({
     defaultValues: {
       username: '',

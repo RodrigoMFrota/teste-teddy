@@ -1,7 +1,11 @@
 import { getExternalCompanies } from '@/services';
 import { useQuery } from '@tanstack/react-query';
 import { format } from 'date-fns';
-import { DeleteExternalCompanies } from './components';
+import {
+  CreateExternalCompanies,
+  DeleteExternalCompanies,
+  EditExternalCompanies,
+} from './components';
 import { Fragment } from 'react/jsx-runtime';
 import { openDialogById } from '@/utils';
 import { useNavigate } from 'react-router-dom';
@@ -33,7 +37,11 @@ export const ExternalCompanies = () => {
             </h1>
 
             <div className='w-1/3 flex justify-end'>
-              <button type='button' className='btn btn-primary text-white'>
+              <button
+                type='button'
+                onClick={() => openDialogById('create-external-companies')}
+                className='btn btn-success text-white'
+              >
                 Adicionar empresa
               </button>
             </div>
@@ -68,7 +76,11 @@ export const ExternalCompanies = () => {
                     </p>
 
                     <div className='flex w-full gap-4 mt-2'>
-                      <button type='button' className='btn w-[48%]'>
+                      <button
+                        type='button'
+                        className='btn w-[48%]'
+                        onClick={() => openDialogById(`edit-external-companies-${comp.id}`)}
+                      >
                         Editar
                       </button>
 
@@ -82,6 +94,14 @@ export const ExternalCompanies = () => {
                     </div>
                   </div>
 
+                  <EditExternalCompanies
+                    id={comp.id}
+                    companyName={comp.companyName}
+                    isActive={comp.isActive}
+                    collaboratorsCount={comp.collaboratorsCount}
+                    refetch={refetch}
+                  />
+
                   <DeleteExternalCompanies
                     id={comp.id}
                     companyName={comp.companyName}
@@ -92,6 +112,8 @@ export const ExternalCompanies = () => {
           </div>
         </div>
       </div>
+
+      <CreateExternalCompanies refetch={refetch} />
     </main>
   );
 };
