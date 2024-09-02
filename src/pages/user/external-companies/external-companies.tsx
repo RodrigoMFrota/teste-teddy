@@ -6,20 +6,29 @@ import {
   DeleteExternalCompanies,
   EditExternalCompanies,
 } from './components';
-import { Fragment } from 'react/jsx-runtime';
+import { Fragment, useState } from 'react';
 import { openDialogById } from '@/utils';
 import { useNavigate } from 'react-router-dom';
 
 export const ExternalCompanies = () => {
+  const itemsPerPage = 12;
   const navigate = useNavigate();
+  const [currentPage, setCurrentPage] = useState(1);
+
   const { data, isLoading, refetch } = useQuery({
     queryKey: ['get-external-companies'],
     queryFn: getExternalCompanies,
   });
 
+  const paginatedData = data
+    ? data.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)
+    : [];
+
+  const totalPages = data ? Math.ceil(data.length / itemsPerPage) : 0;
+
   return (
     <main className='min-h-[calc(100vh-5rem)] bg-zinc-900'>
-      <div className='container mx-auto py-6'>
+      <div className='container mx-auto'>
         <div className='container mx-auto py-6 flex flex-col gap-6'>
           <div className='flex justify-between gap-6 items-center'>
             <div className='w-1/3'>
@@ -49,9 +58,9 @@ export const ExternalCompanies = () => {
 
           <div className='grid grid-cols-4 gap-6'>
             {!isLoading &&
-              data &&
-              data.length >= 0 &&
-              data.map((comp) => (
+              paginatedData &&
+              paginatedData.length >= 0 &&
+              paginatedData.map((comp) => (
                 <Fragment key={comp.id}>
                   <div className='flex flex-col w-full bg-white justify-between p-4 rounded-lg'>
                     <p className='truncate'>
@@ -109,6 +118,30 @@ export const ExternalCompanies = () => {
                   />
                 </Fragment>
               ))}
+          </div>
+
+          <div className='flex justify-center items-center gap-4 py-6'>
+            <button
+              type='button'
+              className='btn btn-primary text-white'
+              onClick={() => setCurrentPage(currentPage - 1)}
+              disabled={currentPage === 1}
+            >
+              Anterior
+            </button>
+
+            <span className='text-white'>
+              Página {currentPage} de {totalPages}
+            </span>
+
+            <button
+              type='button'
+              className='btn btn-primary text-white'
+              onClick={() => setCurrentPage(currentPage + 1)}
+              disabled={currentPage === totalPages}
+            >
+              Próxima
+            </button>
           </div>
         </div>
       </div>
