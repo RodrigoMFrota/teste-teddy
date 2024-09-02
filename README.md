@@ -6,15 +6,17 @@
 
 App front-end do teste da Teddy, desenvolvido com React + Vite & TypeScript.
 
+## 📖 Tasks futuras
+
+- 1: Implementar mecanismo de buscas - 4h;
+- 2: Ordenar a paginação - 1d;
+- 3: Dockerizar a aplicação - 1d;
+
 ## 🔗 URLs
 
 | Ambiente      | URL                                                           |
 | ------------- | ------------------------------------------------------------- |
-| Produção      | <https://...>                                                 |
-
-## 🛝 Npm
-
-Eu usei o **`npm`** como gerenciador de pacotes.
+| Produção      | <https://teste-teddy-beta.vercel.app>                         |
 
 ## 🛠️ Instalação
 
@@ -27,8 +29,3 @@ Eu usei o **`npm`** como gerenciador de pacotes.
 # Execute o comando:
 npm run dev
 ```
-
-## 📜 Convenções
-
-1. Dar preferência por `arrow function` ao criar funções.
-2. Dar preferência por `types`, utilizar `interfaces` apenas quando for extender algum `type`.
