@@ -6,19 +6,28 @@ import {
   DeleteExternalCompanies,
   EditExternalCompanies,
 } from './components';
-import { Fragment, useState } from 'react';
+import { Fragment, useState, useEffect } from 'react';
 import { openDialogById } from '@/utils';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 export const ExternalCompanies = () => {
   const itemsPerPage = 12;
   const navigate = useNavigate();
-  const [currentPage, setCurrentPage] = useState(1);
+  const location = useLocation();
+
+  const queryParams = new URLSearchParams(location.search);
+  const pageParam = Number.parseInt(queryParams.get('page') ?? '1') || 1;
+  const [currentPage, setCurrentPage] = useState(pageParam);
 
   const { data, isLoading, refetch } = useQuery({
     queryKey: ['get-external-companies'],
     queryFn: getExternalCompanies,
   });
+
+  const handlePageChange = (newPage: number) => {
+    setCurrentPage(newPage);
+    navigate(`?page=${newPage}`);
+  };
 
   const paginatedData = data
     ? data.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)
@@ -26,9 +35,13 @@ export const ExternalCompanies = () => {
 
   const totalPages = data ? Math.ceil(data.length / itemsPerPage) : 0;
 
+  useEffect(() => {
+    setCurrentPage(pageParam);
+  }, [pageParam]);
+
   return (
     <main className='min-h-[calc(100vh-5rem)] bg-zinc-900'>
-      <div className='container mx-auto'>
+      <div className='container mx-auto py-6'>
         <div className='container mx-auto py-6 flex flex-col gap-6'>
           <div className='flex justify-between gap-6 items-center'>
             <div className='w-1/3'>
@@ -124,7 +137,7 @@ export const ExternalCompanies = () => {
             <button
               type='button'
               className='btn btn-primary text-white'
-              onClick={() => setCurrentPage(currentPage - 1)}
+              onClick={() => handlePageChange(currentPage - 1)}
               disabled={currentPage === 1}
             >
               Anterior
@@ -137,7 +150,7 @@ export const ExternalCompanies = () => {
             <button
               type='button'
               className='btn btn-primary text-white'
-              onClick={() => setCurrentPage(currentPage + 1)}
+              onClick={() => handlePageChange(currentPage + 1)}
               disabled={currentPage === totalPages}
             >
               Próxima
